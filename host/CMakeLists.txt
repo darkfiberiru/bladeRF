@@ -34,6 +34,30 @@ set(BLADERF_HOST_COMMON_INCLUDE_DIRS
         ${CMAKE_CURRENT_BINARY_DIR}/common/include
 )
 
+
+#####################################################################
+# Choose which host components to build
+#####################################################################
+
+# Overriding these options allows components to be built and packaged separately
+option(ENABLE_FULL_HOST_BUILD "Build all of bladeRF host components" ON)
+
+if(ENABLE_FULL_HOST_BUILD)
+    option(ENABLE_BLADERF-CLI_BUILD "Build the bladeRF-cli component" ON)
+    option(ENABLE_BLADERF-FSK_BUILD "Build the bladeRF-fsk component" ON)
+    option(ENABLE_LIBBLADERF_BUILD "Build the libbladeRF component" ON)
+    option(ENABLE_LIBBLADERF_PYTHON_BUILD "Build the libbladeRF python binding" ON)
+    option(ENABLE_LIBBLADERF_MATLAB_BUILD "Build the libbladeRF matlab binding" ON)
+else(ENABLE_FULL_HOST_BUILD)
+    option(ENABLE_BLADERF-CLI_BUILD "Build the bladeRF-cli component" OFF)
+    option(ENABLE_BLADERF-FSK_BUILD "Build the bladeRF-fsk component" OFF)
+    option(ENABLE_LIBBLADERF_BUILD "Build the libbladeRF component" OFF)
+    option(ENABLE_LIBBLADERF_PYTHON_BUILD "Build the libbladeRF python binding" OFF)
+    option(ENABLE_LIBBLADERF_MATLAB_BUILD "Build the libbladeRF matlab binding" OFF)
+endif(ENABLE_FULL_HOST_BUILD)
+
+
+
 set(BLADERF_HOST_COMMON_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/common/src)
 
 # CMake >= 2.8.4 no longer defines WIN32. Acknowledge this change.
